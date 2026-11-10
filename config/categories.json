@@ -13,7 +13,12 @@
     {
       "name": "Ed Tech",
       "type": "feed",
-      "sources": []
+      "sources": [
+        {
+          "name": "TLT News",
+          "url": "https://tlt.psu.edu/category/news/feed/"
+        }
+      ]
     },
     {
       "name": "Instructional Design",
@@ -24,12 +29,23 @@
     {
       "name": "AI",
       "type": "feed",
-      "sources": []
+      "sources": [
+        {
+          "name": "AI at Penn State",
+          "url": "https://ai.psu.edu/news",
+          "format": "html"
+        }
+      ]
     },
     {
       "name": "Multimedia",
       "type": "feed",
-      "sources": [],
+      "sources": [
+        {
+          "name": "H5P News",
+          "url": "https://help.h5p.com/hc/en-us/sections/7555999389341-News.atom"
+        }
+      ],
       "extraLink": {
         "label": "Open Multimedia channel in Teams",
         "url": "https://teams.microsoft.com/l/channel/19%3AoEtwct1fM3B2DiFPQLoGnNgsh1GRMT-Mq2ZU2ISAyho1%40thread.tacv2/General?groupId=76517b91-9f44-48c6-be37-450f5361517a&tenantId=7cf48d45-3ddb-4389-a9c1-c115526eb52e"
@@ -38,17 +54,44 @@
     {
       "name": "System Admin",
       "type": "feed",
-      "sources": []
+      "sources": [
+        {
+          "name": "GitHub Blog product news",
+          "url": "https://github.blog/news-insights/product-news/feed/"
+        },
+        {
+          "name": "CampusPress",
+          "url": "https://campuspress.com/feed/"
+        },
+        {
+          "name": "Pantheon release notes",
+          "url": "https://docs.pantheon.io/release-notes/rss.xml"
+        },
+        {
+          "name": "Google Cloud release notes",
+          "url": "https://docs.cloud.google.com/feeds/gcp-release-notes.xml"
+        }
+      ]
     },
     {
       "name": "CMS",
       "type": "feed",
-      "sources": []
+      "sources": [
+        {
+          "name": "WordPress security news",
+          "url": "https://wordpress.org/news/category/security/feed/"
+        }
+      ]
     },
     {
       "name": "LMS",
       "type": "feed",
-      "sources": []
+      "sources": [
+        {
+          "name": "Penn State IT Canvas news",
+          "url": "https://www.it.psu.edu/news/category/canvas/feed/"
+        }
+      ]
     },
     {
       "name": "Accessibility",
