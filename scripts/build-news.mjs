@@ -71,7 +71,7 @@ async function fetchSource(source) {
   if (!source.url || source.url.startsWith('[PLACEHOLDER')) return [];
   try {
     const res = await fetch(source.url, {
-      headers: { 'User-Agent': 'it-daily-briefing (Penn State; private news feed)' },
+      headers: { 'User-Agent': 'it-daily-briefing (Penn State; public news feed)' },
       signal: AbortSignal.timeout(15000),
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);

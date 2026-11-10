@@ -45,7 +45,7 @@ No usernames, passwords, tokens, or API keys are stored anywhere in this repo.
 ## Preview locally
 
 ```bash
-cd ~/Code/it-daily-briefing
+cd ~/Code/IT-Daily-Briefing
 npm install
 npm run build:news   # optional: fetch feeds into data/news.json
 npm run preview      # then open http://localhost:8080
