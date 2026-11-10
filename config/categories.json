@@ -8,7 +8,7 @@
     {
       "name": "Service Status",
       "type": "link",
-      "url": "[PLACEHOLDER: ServiceNow service status URL]"
+      "url": "https://pennstate.service-now.com/sp?id=services_status"
     },
     {
       "name": "Ed Tech",
@@ -32,7 +32,7 @@
       "sources": [],
       "extraLink": {
         "label": "Open Multimedia channel in Teams",
-        "url": "[PLACEHOLDER: Multimedia Teams channel URL]"
+        "url": "https://teams.microsoft.com/l/channel/19%3AoEtwct1fM3B2DiFPQLoGnNgsh1GRMT-Mq2ZU2ISAyho1%40thread.tacv2/General?groupId=76517b91-9f44-48c6-be37-450f5361517a&tenantId=7cf48d45-3ddb-4389-a9c1-c115526eb52e"
       }
     },
     {
