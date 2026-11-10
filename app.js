@@ -25,6 +25,32 @@
 
   const isPlaceholder = (url) => !url || String(url).startsWith('[PLACEHOLDER');
 
+  // Teams links open straight in the Teams desktop app (msteams: protocol)
+  // instead of a browser tab. Other links keep opening in a new tab.
+  const TEAMS_HOSTS = ['teams.microsoft.com', 'teams.cloud.microsoft'];
+  function teamsAppUrl(url) {
+    try {
+      const u = new URL(url);
+      if (TEAMS_HOSTS.includes(u.hostname) && u.pathname.startsWith('/l/')) {
+        return `msteams:${u.pathname}${u.search}`;
+      }
+    } catch { /* not a URL */ }
+    return null;
+  }
+
+  // Sets href/target on a link: Teams links open the app, others a new tab.
+  function setLink(a, url) {
+    const app = teamsAppUrl(url);
+    if (app) {
+      a.href = app;
+    } else {
+      a.href = url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+    }
+    return Boolean(app);
+  }
+
   async function loadJson(path) {
     try {
       const res = await fetch(path, { cache: 'no-store' });
@@ -107,10 +133,8 @@
       els.channel.textContent = `${link.label}: link not set yet.`;
     } else {
       const a = document.createElement('a');
-      a.href = link.url;
-      a.target = '_blank';
-      a.rel = 'noopener';
-      a.textContent = `${link.label} (opens in new tab)`;
+      const inApp = setLink(a, link.url);
+      a.textContent = `${link.label} (${inApp ? 'opens in Teams' : 'opens in new tab'})`;
       els.channel.append(a);
     }
     els.channel.hidden = false;
@@ -127,9 +151,7 @@
       time.dateTime = item.date;
       time.textContent = formatDate(item.date);
       const a = document.createElement('a');
-      a.href = item.url;
-      a.target = '_blank';
-      a.rel = 'noopener';
+      setLink(a, item.url);
       a.textContent = item.title;
       li.append(time, ' — ', a);
       return li;
@@ -147,8 +169,14 @@
       if (isPlaceholder(category.url)) {
         els.status.textContent = `The ${category.name} link is not set yet.`;
       } else {
-        window.open(category.url, '_blank', 'noopener');
-        els.status.textContent = `Opened ${category.name} in a new tab.`;
+        const app = teamsAppUrl(category.url);
+        if (app) {
+          window.location.href = app; // hands off to the Teams app; the page stays put
+          els.status.textContent = `Opened ${category.name} in Teams.`;
+        } else {
+          window.open(category.url, '_blank', 'noopener');
+          els.status.textContent = `Opened ${category.name} in a new tab.`;
+        }
       }
       return;
     }
