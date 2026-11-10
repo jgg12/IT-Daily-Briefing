@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>IT Daily Briefing</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#news">Skip to news</a>
+  <header class="site-header">
+    <div class="wrap">
+      <h1>Instructional Technology Daily Briefing</h1>
+      <p class="updated" id="updated">Loading…</p>
+    </div>
+  </header>
+
+  <main class="wrap" id="main">
+    <div class="controls">
+      <label for="category">Category</label>
+      <select id="category"></select>
+    </div>
+
+    <p class="channel-link" id="channel-link" hidden></p>
+    <p class="sr-status" id="status" role="status" aria-live="polite"></p>
+
+    <section aria-labelledby="news-heading">
+      <h2 id="news-heading" class="visually-hidden">News</h2>
+      <ul class="news-list" id="news"></ul>
+      <p class="empty" id="empty" hidden>No new updates in the past 7 days.</p>
+    </section>
+  </main>
+</body>
+</html>

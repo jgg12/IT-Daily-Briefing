@@ -1,0 +1,84 @@
+/* styles.css
+   Colors are tokens so the "Penn State System" design system can replace them later.
+   All text/background pairs below meet WCAG 2.1 AA (4.5:1 or higher). */
+:root {
+  --bg: #ffffff;
+  --surface: #f4f6f9;
+  --text: #1a1a1a;          /* 17.4:1 on --bg */
+  --muted: #4a5563;         /* 7.4:1 on --bg */
+  --header-bg: #001e44;     /* Penn State Nittany Navy */
+  --header-text: #ffffff;   /* 16.4:1 on --header-bg */
+  --link: #1e407c;          /* Beaver Blue, 9.6:1 on --bg */
+  --link-hover: #001e44;
+  --focus: #b45309;         /* 3:1+ focus ring against --bg and --surface */
+  --border: #c7ced8;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1420;
+    --surface: #162133;
+    --text: #e8edf4;        /* 15.3:1 on --bg */
+    --muted: #b3bfcf;       /* 9.4:1 on --bg */
+    --header-bg: #001e44;
+    --header-text: #ffffff;
+    --link: #9cc3ff;        /* 9.9:1 on --bg */
+    --link-hover: #cfe1ff;
+    --focus: #fbbf24;
+    --border: #33445e;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1420; --surface: #162133; --text: #e8edf4; --muted: #b3bfcf;
+  --header-bg: #001e44; --header-text: #ffffff; --link: #9cc3ff;
+  --link-hover: #cfe1ff; --focus: #fbbf24; --border: #33445e;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { font-size: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+}
+.wrap { max-width: 48rem; margin: 0 auto; padding: 0 1rem; }
+
+.skip-link {
+  position: absolute; left: 1rem; top: -3rem;
+  background: var(--bg); color: var(--link); padding: .5rem .75rem; z-index: 10;
+}
+.skip-link:focus { top: 1rem; }
+
+.site-header { background: var(--header-bg); color: var(--header-text); padding: 1.25rem 0; }
+.site-header h1 { margin: 0; font-size: 1.375rem; line-height: 1.3; }
+.updated { margin: .25rem 0 0; font-size: .9rem; color: var(--header-text); opacity: .9; }
+
+.controls { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .75rem; margin: 1.5rem 0 1rem; }
+.controls label { font-weight: 600; }
+select {
+  font: inherit; color: var(--text); background: var(--surface);
+  border: 1px solid var(--border); border-radius: .375rem;
+  padding: .45rem 2rem .45rem .6rem; min-width: 14rem; max-width: 100%;
+}
+
+a { color: var(--link); text-underline-offset: .15em; }
+a:hover { color: var(--link-hover); }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+.channel-link { margin: 0 0 1rem; }
+
+.news-list { list-style: none; margin: 0; padding: 0; }
+.news-list li { padding: .7rem 0; border-bottom: 1px solid var(--border); overflow-wrap: anywhere; }
+.news-list time { color: var(--muted); white-space: nowrap; }
+
+.empty { color: var(--muted); }
+
+.visually-hidden, .sr-status:empty {
+  position: absolute !important; width: 1px; height: 1px; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.sr-status { color: var(--muted); margin: 0 0 1rem; }

@@ -1,0 +1,79 @@
+# .github/workflows/refresh.yml
+# Rebuilds the news feed at 5:00 AM Eastern every day and deploys the private
+# GitHub Pages site. Also deploys whenever main changes (for example when the
+# Claude scheduled task commits data/teams.json). No secrets are used.
+
+name: Refresh news feed
+
+on:
+  schedule:
+    - cron: '0 9 * * *'   # 5:00 AM Eastern during daylight time (EDT)
+    - cron: '0 10 * * *'  # 5:00 AM Eastern during standard time (EST)
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Two crons cover daylight saving time; only the one matching today's
+      # Eastern offset continues, so the feed refreshes once, at 5:00 AM.
+      - name: Check Eastern time
+        id: gate
+        run: |
+          offset="$(TZ=America/New_York date +%z)"
+          run=true
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            if [ "${{ github.event.schedule }}" = "0 9 * * *" ] && [ "$offset" != "-0400" ]; then run=false; fi
+            if [ "${{ github.event.schedule }}" = "0 10 * * *" ] && [ "$offset" != "-0500" ]; then run=false; fi
+          fi
+          echo "run=$run" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v4
+        if: steps.gate.outputs.run == 'true'
+
+      - uses: actions/setup-node@v4
+        if: steps.gate.outputs.run == 'true'
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        if: steps.gate.outputs.run == 'true'
+        run: npm ci
+
+      - name: Build news and site
+        if: steps.gate.outputs.run == 'true'
+        run: npm run build
+
+      - uses: actions/configure-pages@v5
+        if: steps.gate.outputs.run == 'true'
+
+      - uses: actions/upload-pages-artifact@v3
+        if: steps.gate.outputs.run == 'true'
+        with:
+          path: _site
+
+    outputs:
+      run: ${{ steps.gate.outputs.run }}
+
+  deploy:
+    needs: build
+    if: needs.build.outputs.run == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,59 @@
+{
+  "timeZone": "America/New_York",
+  "windowDays": 7,
+  "defaultLimit": 10,
+  "filteredLimit": 10,
+  "maxPerCategoryDefault": 3,
+  "categories": [
+    {
+      "name": "Service Status",
+      "type": "link",
+      "url": "[PLACEHOLDER: ServiceNow service status URL]"
+    },
+    {
+      "name": "Ed Tech",
+      "type": "feed",
+      "sources": []
+    },
+    {
+      "name": "Instructional Design",
+      "type": "teams",
+      "channelLabel": "Open Campus IDs channel in Teams",
+      "channelUrl": "https://teams.cloud.microsoft/l/channel/19%3Ac12232a69f874a04b9134c66c9ffab23%40thread.tacv2/Campus%20IDs?groupId=3ea5f2d0-16cf-41cf-adc2-45b394ac7d85&tenantId=7cf48d45-3ddb-4389-a9c1-c115526eb52e&allowXTenantAccess=False"
+    },
+    {
+      "name": "AI",
+      "type": "feed",
+      "sources": []
+    },
+    {
+      "name": "Multimedia",
+      "type": "feed",
+      "sources": [],
+      "extraLink": {
+        "label": "Open Multimedia channel in Teams",
+        "url": "[PLACEHOLDER: Multimedia Teams channel URL]"
+      }
+    },
+    {
+      "name": "System Admin",
+      "type": "feed",
+      "sources": []
+    },
+    {
+      "name": "CMS",
+      "type": "feed",
+      "sources": []
+    },
+    {
+      "name": "LMS",
+      "type": "feed",
+      "sources": []
+    },
+    {
+      "name": "Accessibility",
+      "type": "link",
+      "url": "https://teams.microsoft.com/l/channel/19%3AQ7jMNqNY4uCIk5wxiOyiE0hg1jTrPm2XKkV3zNM7Nfg1%40thread.tacv2/General?groupId=703ba328-5639-45c6-9e8f-3de16a75a7de&tenantId=7cf48d45-3ddb-4389-a9c1-c115526eb52e"
+    }
+  ]
+}
